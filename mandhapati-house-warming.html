@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f3e9">
+  <title>Mandhapati’s House Warming ceremony</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .petal-field { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:3; }
+    .petal { position:absolute; top:-12vh; width:13px; height:19px; border-radius:80% 0 80% 0; opacity:.78; animation:petal-fall linear infinite; filter:drop-shadow(0 2px 2px #47311b22); }
+    @keyframes petal-fall { 0% { transform:translate3d(0,-8vh,0) rotate(0deg); } 50% { transform:translate3d(55px,50vh,0) rotate(370deg); } 100% { transform:translate3d(-30px,110vh,0) rotate(760deg); } }
+    @media (prefers-reduced-motion: reduce) { .petal { animation:none; display:none; } }
+    :root { --ink:#263c32; --green:#375b49; --gold:#bb8a43; --paper:#fffdf8; --cream:#f8f3e9; }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; color:var(--ink); background:radial-gradient(ellipse at top, #fffdf9 0%, var(--cream) 72%); font-family:'DM Sans',sans-serif; }
+    .invitation { position:relative; max-width:820px; overflow:hidden; background:var(--paper); border:1px solid #e5d6bd; box-shadow:0 24px 80px #314b371a; }
+    .invitation:before,.invitation:after { position:absolute; z-index:0; width:190px; height:190px; content:''; border:1px solid #d8bd8b; border-radius:50%; opacity:.45; }
+    .invitation:before { top:-118px; left:-110px; box-shadow:0 0 0 12px #fffdf8,0 0 0 13px #d8bd8b,0 0 0 25px #fffdf8,0 0 0 26px #d8bd8b; }
+    .invitation:after { right:-110px; bottom:-125px; box-shadow:0 0 0 12px #fffdf8,0 0 0 13px #d8bd8b,0 0 0 25px #fffdf8,0 0 0 26px #d8bd8b; }
+    .content { position:relative; z-index:1; }
+    .eyebrow { color:var(--gold); letter-spacing:.24em; font-size:.72rem; font-weight:700; text-transform:uppercase; }
+    h1,h2,.serif { font-family:'Playfair Display',serif; }
+    h1 { color:var(--green); font-size:clamp(2.4rem,7vw,4.6rem); line-height:1.08; }
+    .ornament { display:flex; align-items:center; justify-content:center; gap:12px; color:var(--gold); }
+    .ornament:before,.ornament:after { width:52px; height:1px; background:#d8bd8b; content:''; }
+    .detail-icon { display:grid; width:42px; height:42px; place-items:center; color:var(--green); background:#edf2eb; border-radius:50%; font-size:1.1rem; }
+    .detail-label { color:#858c81; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; }
+    .detail-value { color:var(--ink); font-weight:600; }
+    .btn-green { color:#fff; background:var(--green); border-color:var(--green); }
+    .btn-green:hover { color:#fff; background:#294638; border-color:#294638; }
+    .form-control:focus { border-color:#88a18f; box-shadow:0 0 0 .2rem #375b4920; }
+    .session-note { color:#7b8279; font-size:.78rem; }
+    @media (max-width:575px) { .invitation { margin:1rem; } }
+  </style>
+</head>
+<body>
+  <div class="petal-field" id="petalField" aria-hidden="true"></div>
+  <main class="container py-4 py-md-5">
+    <article class="invitation rounded-4 mx-auto p-4 p-md-5">
+      <div class="content text-center">
+        <div class="eyebrow mb-3">A new beginning · A place to call home</div>
+        <div class="fw-semibold" style="color:var(--gold)">Mr. Samba Siva Rao &amp; Mrs. Rama Devi</div>
+        <div class="ornament mb-3" aria-hidden="true">✦</div>
+        <p class="serif fs-5 mb-2">With grateful hearts and joyful hopes,</p>
+        <p class="mb-1">the Mandhapati family warmly invites you to celebrate</p>
+        <h1 class="my-3">Mandhapati’s<br>House Warming ceremony</h1>
+        <p class="text-secondary mx-auto" style="max-width:520px">A home is made brighter by the people who fill it with laughter. Please join us as we bless our new home and begin a beautiful new chapter.</p>
+
+        <div class="ornament my-4" aria-hidden="true">❧</div>
+        <div class="row g-4 justify-content-center text-start mb-4">
+          <div class="col-12 col-sm-6 col-md-4"><div class="d-flex gap-3 align-items-center"><span class="detail-icon" aria-hidden="true">◷</span><div><div class="detail-label">Save the date</div><div class="detail-value" id="dateDisplay">November 28, 2026</div></div></div></div>
+          <div class="col-12 col-sm-6 col-md-5"><div class="d-flex gap-3 align-items-center"><span class="detail-icon" aria-hidden="true">⌂</span><div><div class="detail-label">Our new home</div><div class="detail-value" id="addressDisplay">Address to be shared</div></div></div></div>
+        </div>
+        <p class="serif fs-5 mb-1">Your presence will make our day complete.</p>
+        <p class="text-secondary mb-0">With love, <strong>The Mandhapati Family</strong></p>
+
+        <hr class="my-4" style="border-color:#e9dfcf">
+        <div class="row text-start justify-content-center">
+          <div class="col-lg-10">
+            <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+              <div><h2 class="h4 mb-1">Invitation details &amp; RSVP</h2><p class="small text-secondary mb-0">Add the event details and save your response.</p></div>
+              <button class="btn btn-sm btn-outline-secondary" id="resetButton" type="button">Reset this session</button>
+            </div>
+            <form id="inviteForm" class="row g-3">
+              <div class="col-md-6"><label for="eventDate" class="form-label small fw-semibold">Date and time</label><input id="eventDate" class="form-control" type="text" value="November 28, 2026" placeholder="November 28, 2026"></div>
+              <div class="col-md-6"><label for="eventAddress" class="form-label small fw-semibold">Home address</label><input id="eventAddress" class="form-control" type="text" placeholder="Enter the new home address"></div>
+              <div class="col-md-7"><label for="guestName" class="form-label small fw-semibold">Your name</label><input id="guestName" class="form-control" type="text" placeholder="Name for RSVP" autocomplete="name"></div>
+              <div class="col-md-5"><label for="rsvp" class="form-label small fw-semibold">Will you join us?</label><select id="rsvp" class="form-select"><option value="">Choose a response</option><option value="Joyfully attending">Joyfully attending</option><option value="Sorry, can’t make it">Sorry, can’t make it</option></select></div>
+              <div class="col-12 d-flex flex-wrap align-items-center gap-3"><button class="btn btn-green px-4" type="submit">Save invitation</button><span class="session-note" id="saveStatus" aria-live="polite">Your details stay in this browser session.</span></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </article>
+    <p class="text-center session-note mt-3 mb-0">Invitation details are stored in sessionStorage and clear when this browser tab session ends.</p>
+  </main>
+  <script>
+    (() => {
+      const storageKey = 'mandhapati-housewarming-invitation';
+      const form = document.getElementById('inviteForm');
+      const fields = ['eventDate', 'eventAddress', 'guestName', 'rsvp'];
+      const readSaved = () => {
+        try { return JSON.parse(sessionStorage.getItem(storageKey) || '{}'); }
+        catch { return {}; }
+      };
+      const setInvitationDisplay = (data) => {
+        document.getElementById('dateDisplay').textContent = data.eventDate?.trim() || 'November 28, 2026';
+        document.getElementById('addressDisplay').textContent = data.eventAddress?.trim() || 'Address to be shared';
+      };
+      const saved = readSaved();
+      if (!saved.eventDate) saved.eventDate = 'November 28, 2026';
+      sessionStorage.setItem(storageKey, JSON.stringify(saved));
+      document.getElementById('eventDate').value = saved.eventDate;
+      fields.forEach((id) => { if (saved[id]) document.getElementById(id).value = saved[id]; });
+      setInvitationDisplay(saved);
+      if (saved.guestName && saved.rsvp) document.getElementById('saveStatus').textContent = `RSVP saved for ${saved.guestName}: ${saved.rsvp}.`;
+
+      form.addEventListener('input', () => {
+        const data = Object.fromEntries(fields.map((id) => [id, document.getElementById(id).value]));
+        sessionStorage.setItem(storageKey, JSON.stringify(data));
+        setInvitationDisplay(data);
+      });
+      form.addEventListener('change', () => {
+        const data = Object.fromEntries(fields.map((id) => [id, document.getElementById(id).value]));
+        sessionStorage.setItem(storageKey, JSON.stringify(data));
+        setInvitationDisplay(data);
+      });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(fields.map((id) => [id, document.getElementById(id).value.trim()]));
+        sessionStorage.setItem(storageKey, JSON.stringify(data));
+        setInvitationDisplay(data);
+        document.getElementById('saveStatus').textContent = data.guestName && data.rsvp
+          ? `RSVP saved for ${data.guestName}: ${data.rsvp}.`
+          : 'Invitation details saved for this browser session.';
+      });
+      const petalColors = ['#ef476f', '#ffd166', '#06d6a0', '#118ab2', '#c77dff', '#ff8c42', '#f4a7bb'];
+      const petalField = document.getElementById('petalField');
+      for (let i = 0; i < 34; i += 1) {
+        const petal = document.createElement('span');
+        petal.className = 'petal';
+        petal.style.left = ${Math.random() * 100}%;
+        petal.style.background = petalColors[i % petalColors.length];
+        petal.style.animationDuration = ${9 + Math.random() * 13}s;
+        petal.style.animationDelay = ${-Math.random() * 20}s;
+        petal.style.transform = scale();
+        petalField.appendChild(petal);
+      }
+      document.getElementById('resetButton').addEventListener('click', () => {
+        sessionStorage.removeItem(storageKey);
+        form.reset();
+        setInvitationDisplay({});
+        document.getElementById('saveStatus').textContent = 'Session details cleared.';
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
